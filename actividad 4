@@ -1,0 +1,69 @@
+# Importamos las librerías necesarias
+import statistics as stats
+
+# Leer el número de registros
+N = int(input("Ingrese el número de registros: "))
+
+# Inicializamos una lista para almacenar los datos
+db = [N]
+
+# Leer cada registro de datos
+for i in range(N):
+    c = input(f"Ingrese los datos para el registro {i+1} (separados por espacio): ")
+    db.append(c.split(' '))
+
+# Definimos los parámetros requeridos
+P1 = 240
+P2 = 300
+P3 = 160
+P4 = 180
+P5 = 240
+P6 = 275
+P7 = 50
+
+# Creamos una lista con los parámetros
+parametros = [P1, P2, P3, P4, P5, P6, P7]
+
+# Inicializamos la disponibilidad y la lista de éxitos
+disponibilidad = False
+exito = []
+
+# Iteramos a través de los registros de datos
+for i in range(db[0]):
+    # Verificamos si los datos cumplen con los parámetros
+    if (int(db[i + 1][0]) >= parametros[0]) and \
+       (int(db[i + 1][1]) >= parametros[2]) and \
+       (int(db[i + 1][1]) <= parametros[3]) and \
+       (int(db[i + 1][2]) >= parametros[4]) and \
+       (int(db[i + 1][2]) <= parametros[5]):
+        # Si cumplen, añadimos el cuarto dato (presumiblemente un valor numérico) a la lista de éxitos
+        exito.append(int(db[i + 1][3]))
+        disponibilidad = True
+
+# Comprobamos si hubo algún éxito
+if not disponibilidad:
+    print("NO DISPONIBLE")
+else:
+    # Imprimimos los éxitos
+    for i in exito:
+        print(i)
+    
+    # Calculamos estadísticas
+    media = stats.mean(exito)  # Media
+    mediana = stats.median(exito)  # Mediana
+    moda = stats.mode(exito)  # Moda
+    varianza = stats.variance(exito)  # Varianza
+    desviacion_estandar = stats.stdev(exito)  # Desviación estándar
+    coeficiente_variacion = desviacion_estandar / media * 100  # Coeficiente de variación
+
+    # Normalización Z para cada elemento
+    z_scores = [(x - media) / desviacion_estandar for x in exito]  # Normalización Z
+
+    # Imprimimos los resultados
+    print(f"\nMedia: {media}")
+    print(f"Mediana: {mediana}")
+    print(f"Moda: {moda}")
+    print(f"Varianza: {varianza}")
+    print(f"Desviación Estándar: {desviacion_estandar}")
+    print(f"Coeficiente de Variación: {coeficiente_variacion:.2f}%")
+    print("Normalización Z:", z_scores)
