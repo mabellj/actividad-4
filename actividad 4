@@ -1,47 +1,48 @@
-# Lista de datos
+# realizamos la lista de datos
 datos = [10, 12, 23, 23, 16, 23, 21, 16]
 
-# 1. Calcular la Media
-n = len(datos)  # Número de datos
+# 1. Calcular la Media (Se calcula sumando todos los valores y dividiendo entre el número total de valores.)
+n = len(datos)  # cantidad de datos en la lista
 suma = 0
 for x in datos:
     suma += x
-media = suma / n
+    # se recorre la lista haciendo la suma de los valores de los numeros dentro de ella
+media = suma / n # realizamos el calculo de la media de la lista  
 
-# 2. Calcular la Mediana
+# 2. Calcular la Mediana(La mediana es el valor que se encuentra en el medio de un conjunto de datos ordenados)
 # Ordenar los datos
 datos_ordenados = sorted(datos)
-if n % 2 == 1:  # Número impar de datos
-    mediana = datos_ordenados[n // 2]
-else:  # Número par de datos
-    mediana = (datos_ordenados[n // 2 - 1] + datos_ordenados[n // 2]) / 2
+if n % 2 == 1:  # este if nos valida si el valor es Número impar diviendo por 2 
+    mediana = datos_ordenados[n // 2] # la mediana de un valor impar es el valor medio
+else:  # de lo contrario si no es impar el Número es par 
+    mediana = (datos_ordenados[n // 2 - 1] + datos_ordenados[n // 2]) / 2 # la mediana de un valor par es el promedio de los dos valores centrales
 
-# 3. Calcular la Moda
+# 3. Calcular la Moda (entendiendo que es valor que mas se repite en la lista)
 frecuencias = {}
 for x in datos:
     if x in frecuencias:
         frecuencias[x] += 1
     else:
         frecuencias[x] = 1
-
+# esta formula recorre la lista y si el valor se repite se suma para revisar cual es el valor con mas frecuencia
 moda = [k for k, v in frecuencias.items() if v == max(frecuencias.values())]
 
-# 4. Calcular la Varianza
+# 4. Calcular la Varianza (La varianza mide la dispersión de un conjunto de datos en relación con su media)
 suma_cuadrados = 0
 for x in datos:
-    suma_cuadrados += (x - media) ** 2
-varianza = suma_cuadrados / n
+    suma_cuadrados += (x - media) ** 2 # Se calcula la diferencia entre cada dato y la media, se eleva al cuadrado y se suma a una variable suma_cuadrados
+varianza = suma_cuadrados / n # Se divide la suma de los cuadrados por el número total de datos.
 
-# 5. Calcular la Desviación Estándar
-desviacion_estandar = varianza ** 0.5
+# 5. Calcular la Desviación Estándar ( se calcula como la raíz cuadrada de la varianza)
+desviacion_estandar = varianza ** 0.5 # se eleva la raiz cadrada que seria 0.5 y se multiplica por la varianza
 
-# 6. Calcular el Coeficiente de Variación
-coeficiente_variacion = (desviacion_estandar / media) * 100
+# 6. Calcular el Coeficiente de Variación (mide la dispersión relativa en relación con la media, se expresa como porcentaje)
+coeficiente_variacion = (desviacion_estandar / media) * 100 # se divide la desviacion estandar con la media y se cultiplica por 100
 
-# 7. Normalización Z
-normalizacion_z = [(x - media) / desviacion_estandar for x in datos]
+# 7. Normalización Z (indica cuántas desviaciones estándar se encuentra un dato en relación a la media)
+normalizacion_z = [(x - media) / desviacion_estandar for x in datos] 
 
-# Imprimir resultados
+# se Imprime los  resultados
 print(f"Media: {media}")
 print(f"Mediana: {mediana}")
 print(f"Moda: {moda}")
